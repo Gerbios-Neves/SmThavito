@@ -112,5 +112,9 @@ class PagamentoController extends Controller
     public function destroy($id)
     {
         //
+        $pagamento = Pagamento::where('id',$id)->first();
+
+        $pagamento -> delete();
+        return back();
     }
 }

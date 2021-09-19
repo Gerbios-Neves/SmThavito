@@ -10,13 +10,11 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="{{asset('beagle/img/logo-fav.png')}}">
     <title>Escola de Conducao Thavito</title>
+
+    <script src="https://kit.fontawesome.com/df3f7cb777.js" crossorigin="anonymous"></script>
   
-    <!-- css tabela 
-    <link rel="stylesheet" type="text/css" href="{{asset('beagle/lib/perfect-scrollbar/css/perfect-scrollbar.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('beagle/lib/material-design-icons/css/material-design-iconic-font.min.css')}}"/> 
-    <link rel="stylesheet" type="text/css" href="{{asset('beagle/lib/datatables/datatables.net-bs4/css/dataTables.bootstrap4.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('beagle/lib/datatables/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}"/>
-    <link rel="stylesheet" href="{{asset('beagle/css/app.css')}}" type="text/css"/> --> 
+    <link rel="stylesheet" type="text/css" href="{{asset('beagle/tabela/css/dataTables.bootstrap.min.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('beagle/tabela/css/jquery.dataTables.min.css')}}"/>
 
     <link rel="stylesheet" type="text/css" href="{{asset('beagle/lib/perfect-scrollbar/css/perfect-scrollbar.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('beagle/lib/material-design-icons/css/material-design-iconic-font.min.css')}}"/>
@@ -24,6 +22,13 @@
     <link rel="stylesheet" type="text/css" href="{{asset('beagle/lib/jqvmap/jqvmap.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('beagle/lib/datetimepicker/css/bootstrap-datetimepicker.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('beagle/css/app.css')}}" type="text/css"/>
+
+    <style>
+      div.dataTables_wrapper {
+        margin-bottom: 3em;
+      }
+    </style>
+
   </head>
   <body>
     <div class="be-wrapper be-fixed-sidebar">
@@ -34,17 +39,51 @@
           <div class="page-title"><span>Tela Principal</span></div>
           <div class="be-right-navbar">
             <ul class="nav navbar-nav float-right be-user-nav">
-              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><img src="{{asset('beagle/img/avatar.png')}}" alt="Avatar"><span class="user-name">Túpac Amaru</span></a>
-                <div class="dropdown-menu" role="menu">     
-                  <div class="user-info">
-                    <div class="user-name">Túpac Amaru</div>
-                    <div class="user-position online">Available</div>
-                  </div><a class="dropdown-item" href="pages-profile.html"><span class="icon mdi mdi-face"></span>Account</a><a class="dropdown-item" href="#"><span class="icon mdi mdi-settings"></span>Settings</a><a class="dropdown-item" href="/login"><span class="icon mdi mdi-power"></span>Logout</a>
-                </div>
-              </li>
+                @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <!-- <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li> -->
+                            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><img src="{{asset('beagle/img/avatar.png')}}" alt="Avatar"><span class="user-name">Túpac Amaru</span></a>
+                                <div class="dropdown-menu" role="menu">     
+                                  <div class="user-info">
+                                    <div class="user-name"> {{ Auth::user()->name }} </div>
+                                    <div class="user-position online">Logado</div>
+                                  </div>
+                                  <!-- <a class="dropdown-item" href="pages-profile.html"><span class="icon mdi mdi-face"></span>Account</a>
+                                  <a class="dropdown-item" href="#"><span class="icon mdi mdi-settings"></span>Settings</a> -->
+                                  <a onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" class="dropdown-item" href="{{route('logout')}}"><span class="icon mdi mdi-power"></span>Sair</a>
+                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                  @endguest
             </ul>
             <ul class="nav navbar-nav float-right be-icons-nav">
-              <li class="nav-item dropdown"><a class="nav-link be-toggle-right-sidebar" href="#" role="button" aria-expanded="false"><span class="icon mdi mdi-settings"></span></a></li>
+              <!-- <li class="nav-item dropdown"><a class="nav-link be-toggle-right-sidebar" href="#" role="button" aria-expanded="false"><span class="icon mdi mdi-settings"></span></a></li> -->
               <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><span class="icon mdi mdi-notifications"></span><span class="indicator"></span></a>
                 <ul class="dropdown-menu be-notifications">
                   <li>
@@ -79,7 +118,7 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><span class="icon mdi mdi-apps"></span></a>
+              <!-- <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false"><span class="icon mdi mdi-apps"></span></a>
                 <ul class="dropdown-menu be-connections">
                   <li>
                     <div class="list">
@@ -99,7 +138,7 @@
                     <div class="footer"> <a href="#">More</a></div>
                   </li>
                 </ul>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div>
@@ -115,9 +154,9 @@
                   </li>
                   <li class="parent"><a href="#"><i class="icon mdi mdi-dot-circle"></i><span>Alunos</span></a>
                     <ul class="sub-menu">
-                      <li><a href="/aluno/create">Adicionar novo Aluno</a>
+                      <li class="parent"><a href="/aluno/create"><i class="fas fa-user-plus"></i>Adicionar novo Aluno</a>
                       </li>
-                      <li><a href="/aluno">Listar Alunos</a>
+                      <li><a href="/aluno"><i class="fas fa-list"></i>Listar Alunos</a>
                       </li>
                     </ul>
                   </li>
@@ -191,31 +230,8 @@
         @yield('content')
       </div>
     </div>
-    <script src="{{asset('beagle/lib/jquery/jquery.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/lib/perfect-scrollbar/js/perfect-scrollbar.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/lib/bootstrap/dist/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/js/app.js')}}" type="text/javascript"></script> 
-    <script src="{{asset('beagle/lib/datatables/datatables.net/js/jquery.dataTables.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/lib/datatables/datatables.net-bs4/js/dataTables.bootstrap4.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/lib/datatables/datatables.net-buttons/js/dataTables.buttons.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/lib/datatables/datatables.net-buttons/js/buttons.flash.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/lib/datatables/jszip/jszip.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/lib/datatables/pdfmake/pdfmake.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/lib/datatables/pdfmake/vfs_fonts.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/lib/datatables/datatables.net-buttons/js/buttons.colVis.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/lib/datatables/datatables.net-buttons/js/buttons.print.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/lib/datatables/datatables.net-buttons/js/buttons.html5.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/lib/datatables/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/lib/datatables/datatables.net-responsive/js/dataTables.responsive.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('beagle/lib/datatables/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}" type="text/javascript"></script>
-  <!--  <script type="text/javascript">
-      $(document).ready(function(){
-      	//-initialize the javascript
-      	App.init();
-      	App.dataTables();
-      });
-    </script> -->
 
+   
     <script src="{{asset('beagle/lib/jquery/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('beagle/lib/perfect-scrollbar/js/perfect-scrollbar.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('beagle/lib/bootstrap/dist/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
@@ -232,13 +248,17 @@
     <script src="{{asset('beagle/lib/jquery-ui/jquery-ui.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('beagle/lib/jqvmap/jquery.vmap.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('beagle/lib/jqvmap/maps/jquery.vmap.world.js')}}" type="text/javascript"></script>
+    
+    <script src="{{asset('beagle/tabela/js/dataTables.bootstrap.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('beagle/tabela/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
+    
     <script type="text/javascript">
-      $(document).ready(function(){
-      	//-initialize the javascript
+        $(document).ready(function() {
+            $('table.display').DataTable();
+        });
+
       	App.init();
-      	App.dashboard();
-        App.dataTables();
-      });
+        App.dashboard();
     </script>
   </body>
 

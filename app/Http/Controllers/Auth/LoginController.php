@@ -38,7 +38,5 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function create(){
-        return view('admin.auth.logar');
-    }
+
 }

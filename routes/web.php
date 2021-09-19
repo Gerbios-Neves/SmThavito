@@ -12,18 +12,21 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/logar');
 });
+
+Route::get('/logar', function (){
+    return view('auth.logar');
+}); 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/login', 'LoginController');
-
-Route::get('/admin', 'AdminController@index')->name('admin');
+//Route::resource('/login', 'LoginController'); 
 
 Route::resource('/aluno', 'AlunoController');
+// Route::get('/alunos/{id}', 'AlunoController@show');
 
 Route::resource('/professor', 'ProfessorController');
 

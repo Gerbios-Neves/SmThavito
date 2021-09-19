@@ -111,5 +111,9 @@ class TurmaController extends Controller
     public function destroy($id)
     {
         //
+        $turma = Turma::where('id',$id)->first();
+
+        $turma -> delete();
+        return back();
     }
 }

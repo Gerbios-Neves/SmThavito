@@ -34,7 +34,9 @@
                         <select name="estado_civil" class="form-control">
                           <option value="Selecione" selected>Selecione</option>
                           <option value="Solteiro">Solteiro</option>
+                          <option value="Solteira">Solteira</option>
                           <option value="Casado">Casado</option>
+                          <option value="Casada">Casada</option>
                         </select>
                       </div>
                     </div>

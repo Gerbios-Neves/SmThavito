@@ -10,8 +10,8 @@
                     </div>
                   </div>
                 </div>
-                <div class="card-body">
-                  <table class="table table-striped table-hover table-fw-widget" id="table1">
+            <div class="card-body">
+                <table id="" class="display" style="width:100%">
                     <thead>
                       <tr>
                         <th>#</th>
@@ -32,22 +32,55 @@
                         <td>{{$aluno->carta->tipo_carta}}</td>
                         <td>{{$aluno->turma->horario}}</td>
                         <td>{{$aluno->tipo_pagamento}}</td>
-                        <td><a class="btn btn-warning" href="/aluno/{{$aluno->id}}" style="color: white">Ver</a></td>
-                        <td><a class="btn btn-warning" href="/aluno/{{$aluno->id}}/edit" style="color: blue">Editar</a></td>
-                        <td><a class="btn btn-warning" href="" style="color: red">Deletar</a></td>
+                        <td class="row"> 
+                          <div class="col">
+                          <a class="btn btn-warning" href="/aluno/{{$aluno->id}}"><i class="fas fa-eye">Ver</i></a>
+                          </div>  
+                          <div class="col"> 
+                          <a class="btn btn-primary col"  href="/aluno/{{$aluno->id}}/edit"><i class="far fa-edit"></i>Editar</a>
+                          </div>
+                          <form class="col" action="{{route('aluno.destroy', $aluno->id)}}" method="post">
+                              @method('delete')
+                              @csrf
+                              <button class="btn btn-danger" type="submit"><i class="far fa-trash-alt"></i>Deletar</button>
+                          </form>
+                        </td>
                       </tr>
                     @endforeach 
                     </tbody>
-                  </table>
+                </table>
                 </div>
-              </div>
+          </div>
 </div>
 
 @endsection
-<script type="text/javascript">
-      $(document).ready(function(){
-      	//-initialize the javascript
-      	App.init();
-      	App.dataTables();
-      });
-    </script>
+
+<!-- Botão para acionar modal 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
+  Abrir modal de demonstração
+</button> -->
+
+<!-- Modal 
+<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Salvar mudanças</button>
+      </div>
+    </div>
+  </div>
+</div> 
+$('#meuModal').on('shown.bs.modal', function () {
+  $('#meuInput').trigger('focus')
+}) -->
+

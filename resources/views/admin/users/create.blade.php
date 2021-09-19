@@ -37,8 +37,8 @@
                       <div class="">
                         <select name="tipo_previlegio" class="form-control">
                           <option value="Selecione" selected>Selecione</option>
-                          <option value="Director Administrativo">Director Administrativo</option>
-                          <option value="Secretaria">Secretaria</option>
+                          <option value="director administrativo">Director Administrativo</option>
+                          <option value="secretaria">Secretaria/o</option>
                         </select>
                       </div>
                     </div>

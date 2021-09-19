@@ -11,7 +11,7 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <table class="table table-striped table-hover table-fw-widget" id="table1">
+                  <table id="" class="display" style="width:100%"> 
                     <thead>
                       <tr>
                         <th>#</th>
@@ -28,8 +28,15 @@
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->tipo_previlegio}}</td>
-                        <td><a class="btn btn-warning" href="/user/{{$user->id}}/edit" style="color: blue">Editar</a></td>
-                        <td><a class="btn btn-warning" href="" style="color: red">Deletar</a></td>
+                        <td class="row">
+                          <div class="col">
+                            <a class="btn btn-primary" href="/user/{{$user->id}}/edit">Editar</a>
+                          </div>
+                          <form class="col" action="{{route('user.destroy', $user->id)}}" method="post">
+                            @method('delete')
+                            @csrf
+                            <button class="btn btn-danger" type="submit">Deletar</button>
+                        </form>
                       </tr>
                     @endforeach
                     </tbody>

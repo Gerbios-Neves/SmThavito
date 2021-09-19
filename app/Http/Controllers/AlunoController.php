@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Aluno;
 use App\Carta;
 use App\Turma;
+use App\Pagamento;
 
 class AlunoController extends Controller
 {
@@ -21,6 +22,7 @@ class AlunoController extends Controller
         $alunos = Aluno::all();
         $cartas = Carta::all();
         $turmas = Turma::all();
+        $pagamento = Pagamento::all();
         return view('admin.aluno.index', compact('alunos'));
     }
     
@@ -136,5 +138,10 @@ class AlunoController extends Controller
     public function destroy($id)
     {
         //
+        $aluno = Aluno::where('id',$id)->first();
+
+        $aluno ->delete();
+        return back();
+
     }
 }

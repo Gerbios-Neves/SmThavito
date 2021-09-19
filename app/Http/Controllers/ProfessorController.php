@@ -101,5 +101,9 @@ class ProfessorController extends Controller
     public function destroy($id)
     {
         //
+        $professor = Professor::where('id',$id)->first();
+
+        $professor -> delete();
+        return back();
     }
 }

@@ -29,10 +29,11 @@ class CreateAlunosTable extends Migration
             $table->unsignedBigInteger('carta_id');
             $table->unsignedBigInteger('turma_id');
             $table->string('tipo_pagamento');
+            $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('carta_id')->references('id')->on('cartas');
-            $table->foreign('turma_id')->references('id')->on('turmas');
+            $table->foreign('carta_id')->references('id')->on('cartas')->onDelete('cascade');
+            $table->foreign('turma_id')->references('id')->on('turmas')->onDelete('cascade');
         });
     }
 

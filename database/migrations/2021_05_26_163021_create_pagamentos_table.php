@@ -21,10 +21,11 @@ class CreatePagamentosTable extends Migration
             $table->unsignedBigInteger('aluno_id');
             $table->unsignedBigInteger('user_id');
             $table->string('tipo_pagamento');
+            $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('aluno_id')->references('id')->on('alunos');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('aluno_id')->references('id')->on('alunos')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

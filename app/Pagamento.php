@@ -16,4 +16,8 @@ class Pagamento extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function carta(){
+        return $this->belongsTo('App\Carta');
+    }
 }

@@ -11,7 +11,7 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <table class="table table-striped table-hover table-fw-widget" id="table1">
+                <table id="" class="display" style="width:100%">
                     <thead>
                       <tr>
                         <th>#</th>
@@ -32,8 +32,16 @@
                         <td>{{$pagamento->aluno->nome}}</td>
                         <td>{{$pagamento->user->name}}</td>
                         <td>{{$pagamento->created_at}}</td>
-                        <td><a class="btn btn-warning" href="/pagamento/{{$pagamento->id}}/edit" style="color: blue">Editar</a></td>
-                        <td><a class="btn btn-warning" href="" style="color: red">Deletar</a></td>
+                        <td class="row">
+                          <div class="col">
+                            <a class="btn btn-primary" href="/pagamento/{{$pagamento->id}}/edit">Editar</a>
+                          </div>
+                          <form class="col" action="{{route('pagamento.destroy', $pagamento->id)}}" method="post">
+                              @method('delete')
+                              @csrf
+                              <button class="btn btn-danger" type="submit">Deletar</button>
+                          </form>
+                        </td>
                       </tr>
                     @endforeach
                     </tbody>
@@ -43,10 +51,3 @@
 </div>
 
 @endsection
-<script type="text/javascript">
-      $(document).ready(function(){
-      	//-initialize the javascript
-      	App.init();
-      	App.dataTables();
-      });
-    </script>

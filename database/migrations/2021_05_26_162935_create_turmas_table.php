@@ -19,9 +19,10 @@ class CreateTurmasTable extends Migration
             $table->string('horario');
             $table->string('ano');
             $table->unsignedBigInteger('professor_id');
+            $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('professor_id')->references('id')->on('professores');
+            $table->foreign('professor_id')->references('id')->on('professores')->onDelete('cascade');
         });
     }
 

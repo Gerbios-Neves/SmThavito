@@ -11,36 +11,37 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <table class="table table-striped table-hover table-fw-widget" id="table1">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Tipos de Carta</th>
-                        <th>Precos</th>
-                        <th>Accoes</th>
-                      </tr>
-                    </thead>
+                    <table id="" class="display" style="width:100%">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Tipos de Carta</th>
+                            <th>Precos</th>
+                            <th>Accoes</th>
+                          </tr>
+                        </thead>
                     <tbody>
                     @foreach ($cartas as $carta)
                       <tr class="odd gradeX">
-                        <td>{{$carta->id}}</td>
-                        <td>{{$carta->tipo_carta}}</td>
-                        <td>{{$carta->preco}}</td>
-                        <td><a class="btn btn-warning" href="/carta/{{$carta->id}}/edit" style="color: blue">Editar</a></td>
-                        <td><a class="btn btn-warning" href="" style="color: red">Deletar</a></td>
-                      </tr>
-                    @endforeach
-                    </tbody>
-                  </table>
+                            <td>{{$carta->id}}</td>
+                            <td>{{$carta->tipo_carta}}</td>
+                            <td>{{$carta->preco}}</td>
+                            <td class="row"> 
+                              <div class="col"> 
+                                <a class="btn btn-primary col"  href="/carta/{{$carta->id}}/edit">Editar</a>
+                              </div>
+                              <form class="col" action="{{route('carta.destroy', $carta->id)}}" method="post">
+                                  @method('delete')
+                                  @csrf
+                                  <button class="btn btn-danger" type="submit">Deletar</button>
+                              </form>
+                            </td>
+                        </tr>
+                        @endforeach 
+                      </tbody>
+                    </table>
                 </div>
-              </div> 
+      </div> 
 </div>
 
 @endsection
- <script type="text/javascript">
-      $(document).ready(function(){
-      	//-initialize the javascript
-      	App.init();
-      	App.dataTables();
-      });
-    </script> 

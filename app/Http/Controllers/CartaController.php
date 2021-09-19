@@ -100,5 +100,9 @@ class CartaController extends Controller
     public function destroy($id)
     {
         //
+        $carta = Carta::where('id',$id)->first();
+
+        $carta -> delete();
+        return back();
     }
 }
