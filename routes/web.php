@@ -39,3 +39,9 @@ Route::resource('/pagamento', 'PagamentoController');
 Route::get('/role', 'RoleController@index')->name('role');
 
 Route::resource('/user', 'UserController');
+
+Route::get('/relatorio', 'RelatorioController@index');
+
+Route::get('relatorio/relatorio', function(){
+    return view('admin.relatorio.relatorio');
+});

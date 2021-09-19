@@ -5,15 +5,17 @@
 <div class="card card-table">
       <div class="card-header">Detalhes do Aluno:
             <a href="/aluno" class="btn btn-warning">Retornar a Lista</a>
+            
             @php
-              $pagamentos = App\Pagamento::where('aluno_id',$aluno->id)->get();
+              $pagamentos = App\Pagamento::where('aluno_id',$aluno->id)->where('tipo_pagamento', 'Cartar')->get();
               $valor_pago = 0;
+          
               foreach($pagamentos as $pagamento){
-                  $valor_pago += $pagamento->valor;
+                  $valor_pago += $pagamento->valor_pago;
               }
               $aluno = App\Aluno::with('carta')->where('id',$aluno->id)->first();
               $divida = $aluno->carta->preco - $valor_pago;
-           @endphp
+            @endphp
 
         <a class="btn btn-default">
             Total Pago: {{$valor_pago}}   

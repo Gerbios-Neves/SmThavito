@@ -15,10 +15,26 @@
                       <label for="inputvalor_pago">Valor Pago</label>
                       <input class="form-control" name="valor_pago" id="inputvalor_pago" type="text" placeholder="Valor Pago">
                   </div>
-                  <div class="form-group col-md-6">
+
+                 
+                    <div class="form-group col-md-6">
+                      <label class="">Descricao</label>
+                      <div class="">
+                        <select name="tipo_pagamento" class="form-control">
+                          <option value="Selecione" selected>Selecione</option>
+                          <option value="Carta">Carta</option>
+                          <option value="Taxa Teorico">Taxa do Exame Teorico</option>
+                          <option value="Taxa Pratica">Taxa do Exame Practico</option>
+                          <option value="Processo do Aluno">Processo do Aluno</option>
+                        </select>
+                      </div>
+                    </div>
+                
+
+                  <!-- <div class="form-group col-md-6">
                       <label for="inputdescricao">Descricao</label>
                       <input class="form-control" name="tipo_pagamento" id="inputdescriacao" type="text" placeholder="Descricao">
-                  </div>
+                  </div> -->
                     <!--<div class="form-group col-md-6">
                       <label class="">Tipo de Pagamento</label>
                       <div class="">
@@ -40,7 +56,7 @@
                       </select>
                       </div>
                     </div>
-                    <div class="form-group pt-2">
+                    <!-- <div class="form-group pt-2">
                       <label class="">Nome do Usuario</label>
                       <div class="">
                         <select name="user_id" class="form-control">
@@ -49,7 +65,7 @@
                           @endforeach
                         </select>
                       </div>
-                    </div>
+                    </div> -->
                         <p class="text-right">
                           <button class="btn btn-space btn-secondary">Cancel</button>
                           <button class="btn btn-space btn-primary" type="submit">Submit</button>

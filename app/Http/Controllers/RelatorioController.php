@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use Illuminate\Support\Facades\Hash;
+use App\Pagamento;
+use PDF;
 
-class UserController extends Controller
+class RelatorioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,20 @@ class UserController extends Controller
     public function index()
     {
         //
-        $users = User::all();
-        return view('admin.users.index', compact('users'));
-    
+    // $pdf = \App::make('dompdf.wrapper');
+    // $pdf->loadHTML('<h1></h1>');
+    // return $pdf->stream();
+
+    $pagamentos = Pagamento::all();
+    $pdf = PDF::loadView('admin.pagamento.pdf', compact('pagamentos'));
+    // return $pdf->download('invoice.pdf');
+
+
+    // $pdf = App::make('dompdf.wrapper');
+    // $pdf->loadHTML('<h1>Test</h1>');
+    return $pdf->stream();
+
+
     }
 
     /**
@@ -29,8 +40,6 @@ class UserController extends Controller
     public function create()
     {
         //
-        $users = User::all();
-        return view('admin.users.create');
     }
 
     /**
@@ -42,14 +51,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $user = new User();
-        $user -> name=$request -> name;
-        $user -> email=$request -> email;
-        $user -> password=Hash::make($request -> password);
-        $user -> tipo_previlegio=$request -> tipo_previlegio;
-
-        $user ->save();
-        return back();
     }
 
     /**
@@ -72,8 +73,6 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        $user = User::where('id',$id)->first();
-        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -86,14 +85,6 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $user = User::where('id',$id)->first();
-        $user -> name=$request -> name;
-        $user -> email=$request -> email;
-        $user -> password=$request -> password;
-        $user -> tipo_previlegio=$request -> tipo_previlegio;
-
-        $user ->update();
-        return back();
     }
 
     /**
@@ -105,9 +96,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-        $user = User::where('id',$id)->first();
-
-        $user -> delete();
-        return back();
     }
 }

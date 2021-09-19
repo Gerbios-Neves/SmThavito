@@ -39,10 +39,36 @@
                           <div class="col"> 
                           <a class="btn btn-primary col"  href="/aluno/{{$aluno->id}}/edit"><i class="far fa-edit"></i>Editar</a>
                           </div>
+                          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                             Deletar
+                          </button>
                           <form class="col" action="{{route('aluno.destroy', $aluno->id)}}" method="post">
                               @method('delete')
                               @csrf
-                              <button class="btn btn-danger" type="submit"><i class="far fa-trash-alt"></i>Deletar</button>
+                              <!-- <button class="btn btn-danger" type="submit"><i class="far fa-trash-alt"></i>Deletar</button> -->
+
+                              <!-- Button trigger modal -->
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title" id="exampleModalLabel">Atencao</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Tem a certeza que deseja eliminar?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </form>
                         </td>
                       </tr>
@@ -55,32 +81,4 @@
 
 @endsection
 
-<!-- Botão para acionar modal 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
-  Abrir modal de demonstração
-</button> -->
-
-<!-- Modal 
-<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary">Salvar mudanças</button>
-      </div>
-    </div>
-  </div>
-</div> 
-$('#meuModal').on('shown.bs.modal', function () {
-  $('#meuInput').trigger('focus')
-}) -->
 

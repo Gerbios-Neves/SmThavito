@@ -196,7 +196,7 @@
                   </li>
                   <li class="parent"><a href="#"><i class="icon mdi mdi-view-web"></i><span>Relatorios</span></a>
                     <ul class="sub-menu">
-                      <li><a href="#">Relatorios</a>
+                      <li><a href="/relatorio/relatorio">Relatorios</a>
                       </li>
                     </ul>
                   </li>

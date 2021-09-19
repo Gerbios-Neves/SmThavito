@@ -49,7 +49,7 @@ class PagamentoController extends Controller
         $pagamento = new Pagamento();
         $pagamento -> valor_pago=$request -> valor_pago;
         $pagamento -> aluno_id = $request -> aluno_id;
-        $pagamento -> user_id = $request -> user_id;
+        $pagamento -> user_id = auth()->id();
         $pagamento -> tipo_pagamento=$request -> tipo_pagamento;
 
         $pagamento ->save();
